@@ -1,4 +1,4 @@
-﻿/*
+/*
  * grunt-tsng
  * https://github.com/DamianEdwards/grunt-tsng
  *
@@ -239,7 +239,7 @@ module.exports = function (grunt) {
                 filterDeclaration: /^\s*function\s*([a-zA-Z_$]+)\s*\([a-zA-Z0-9_$:,\s]*\)/,
 
                 // constructor($window: ng.IWindowService) {
-                constructor: /constructor\s*\(\s*([^(]*)\s*\)\s*{/,
+                constructor: /constructor\s*\(\s*(private|public)?([^(]*)\s*\)\s*{/,
 
                 closingBrace: /^\s*}\s*$/
             };
@@ -308,7 +308,7 @@ module.exports = function (grunt) {
                     matches = line.match(regex.controllerDeclaration);
                     if (matches) {
                         (function () {
-                            var fnName = matches[1];
+                            var fnName = matches[matches.length];
                             var name = (module ? module.name + "." : "") + fnName;
                             var ctor = parseConstructor(content) || { args: [] };
                             
